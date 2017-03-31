@@ -1,12 +1,6 @@
 ﻿using System;
 
-namespace AssemblyCSharp
-{
-	public class Fruit
-	{
-		public Fruit()
-		{
-		}
-	}
+public class Fruit : Food {
+	public override string Name { get { return "Fruit"; } }
+	public override int Satiation { get { return 5; } }
 }
-

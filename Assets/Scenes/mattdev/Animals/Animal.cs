@@ -23,17 +23,7 @@ public abstract class Animal {
 	public string Name { get; set; }
 	// WHAT WE'RE MADE OF. PROBABLY MEAT.
 	public abstract Dictionary<Food, int> MadeOf { get; }
-
-	////////////////////
-	/// STATUS STUFF ///
-	////////////////////
-
-	// We good bro?
-	public bool IsAlive { get { return Health > 0; } }
-	public bool TooCold { get { return BodyTemp < MinTemp; } }
-	public bool TooHot { get { return BodyTemp > MinTemp; } }
-	public bool Hungry { get { return Fullness < HungerThreshold; } }
-	public bool Starving { get { return Fullness < 1; } }
+	// public abstract string Description { get; }
 
 	////////////////////
 	/// HEALTH STUFF ///
@@ -176,6 +166,17 @@ public abstract class Animal {
 			Health -= damage > 0 ? damage : 1;
 		}
 	}
+
+	////////////////////
+	/// STATUS STUFF ///
+	////////////////////
+
+	// We good bro?
+	public bool IsAlive { get { return Health > 0; } }
+	public bool TooCold { get { return BodyTemp < MinTemp; } }
+	public bool TooHot { get { return BodyTemp > MinTemp; } }
+	public bool Hungry { get { return Fullness < HungerThreshold; } }
+	public bool Starving { get { return Fullness < 1; } }
 
 	//////////////////////
 	/// ACTIVITY STUFF ///

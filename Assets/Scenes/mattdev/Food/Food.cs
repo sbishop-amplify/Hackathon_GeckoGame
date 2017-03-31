@@ -9,13 +9,11 @@ public abstract class Food {
 	// How much the food fills us per unit
 	public abstract int Satiation { get; }
 
-	public override bool Equals (object obj)
-	{
+	public override bool Equals (object obj) {
 		return (obj is Food) && Name.Equals((obj as Food).Name);
 	}
 
-	public override string ToString ()
-	{
+	public override string ToString () {
 		return Name;
 	}
 

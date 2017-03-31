@@ -1,12 +1,6 @@
 ﻿using System;
 
-namespace AssemblyCSharp
-{
-	public class TreeNut
-	{
-		public TreeNut()
-		{
-		}
-	}
+public class Acorn : Food {
+	public override string Name { get { return "Acorn"; } }
+	public override int Satiation { get { return 3; } }
 }
-
