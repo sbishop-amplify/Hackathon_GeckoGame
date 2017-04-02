@@ -62,4 +62,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
+# Versioning issues; handled by unity on startup, not a problem
+Library/assetDatabase3
+Library/shadercompiler-UnityShaderCompiler0.log
