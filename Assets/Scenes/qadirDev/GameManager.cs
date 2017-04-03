@@ -2,7 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public enum GameEvent {
+	animalDied, 
+	animalIsHot,
+	levelChanged,
+	gameOver
+};
+
+
+public static class GameManager : MonoBehaviour {
 
 	private int level = 1;
 	private int numLizards = 1;

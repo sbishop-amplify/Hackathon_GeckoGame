@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 public class Environment : MonoBehaviour {
-	//TODO: Replace object with animal class later
 	private Dictionary<Food, int> foodSupply = new Dictionary<Food, int>();
 
 	public float CurrentTemp { get; set; }
