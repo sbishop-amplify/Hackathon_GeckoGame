@@ -201,28 +201,38 @@ public abstract class Animal : MonoBehaviour {
 		var xy = gameObject.transform.position;
 		float temp = MyEnvironment.GetTemp (xy.x, xy.y);
 		CheckTemp(temp);
-		// Might make more sense to check for death after every step
+		if (!IsAlive) {
+			if (TooCold) {
+				Debug.Log(string.Format("{0} froze to death!", Name));
+			} else {
+				Debug.Log(string.Format("{0} suffered a heat stroke!", Name));
+			}
+			Die ();
+			return;
+		}
+
 		// Check for and eat food if we're hungry
 		CheckHunger();
+		if (!IsAlive) {
+			Debug.Log(string.Format("{0} starved to death!", Name));
+			Die ();
+			return;
+		}
 
-		if (IsAlive) {
-			if (TooCold) {
-				Debug.Log(string.Format("{0} is too cold!", Name));
-				// Report
-			} else if (TooHot) {
-				Debug.Log(string.Format("{0} is too hot!", Name));
-				// Report
-			}
-			if (Starving) {
-				Debug.Log(string.Format("{0} is starving!", Name));
-				// Report
-			} else if (Hungry) {
-				Debug.Log(string.Format("{0} is hungry!", Name));
-				// Report
-			}
-		} else {
-			Debug.Log(string.Format("{0} is dead!", Name));
-			Die();
+		// We survived!
+		if (TooCold) {
+			Debug.Log(string.Format("{0} is too cold!", Name));
+			// Report
+		} else if (TooHot) {
+			Debug.Log(string.Format("{0} is too hot!", Name));
+			// Report
+		}
+		if (Starving) {
+			Debug.Log(string.Format("{0} is starving!", Name));
+			// Report
+		} else if (Hungry) {
+			Debug.Log(string.Format("{0} is hungry!", Name));
+			// Report
 		}
 	}
 
