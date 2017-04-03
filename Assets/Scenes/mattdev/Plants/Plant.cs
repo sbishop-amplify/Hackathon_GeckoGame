@@ -22,6 +22,7 @@ public abstract class Plant : MonoBehaviour {
 		var produce = FoodList.Where(f => Cycle % f.Value == 0).Select(f => f.Key).ToList();
 
 		foreach (KeyValuePair<Food, int> food in produce) {
+			Debug.Log(string.Format("{0} produced {1} {2}(s)", Species, food.Value, food.Key));
 			MyEnvironment.AddFood(food.Key, food.Value);
 		}
 
