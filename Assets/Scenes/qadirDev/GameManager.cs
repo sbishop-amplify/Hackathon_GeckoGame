@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour {
 	private const int INITIAL_AMOUNT_OF_ANIMALS = 1;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
-	private Lizard[] lizards; 
-	private Bush[] bushes; 
+	private Animal[] animals; 
+	private Plant[] plants; 
 
 	public void UpdateGameState(GameEvent gameEvent){
 		switch (gameEvent) {
@@ -50,17 +50,17 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject[] lizObjects = GameObject.FindGameObjectsWithTag ("Lizard"); 
-		lizards = new Lizard[lizObjects.Length]; 
-		for(int i = 0; i < lizards.Length; i++)
+		animals = new Animal[lizObjects.Length]; 
+		for(int i = 0; i < animals.Length; i++)
 		{
-			lizards [i] = lizObjects [i].GetComponent<Lizard> (); 
+			animals [i] = lizObjects [i].GetComponent<Animal> (); 
 		}
 
 		GameObject[] bushObjects = GameObject.FindGameObjectsWithTag ("Bush"); 
-		bushes = new Bush[bushObjects.Length]; 
-		for(int i = 0; i < bushes.Length; i++)
+		plants = new Plant[bushObjects.Length]; 
+		for(int i = 0; i < plants.Length; i++)
 		{
-			bushes [i] = bushObjects [i].GetComponent<Bush> (); 
+			plants [i] = bushObjects [i].GetComponent<Bush> (); 
 		}
 	}
 	
@@ -70,12 +70,12 @@ public class GameManager : MonoBehaviour {
 		if (timeElapsed >= updateOn) {
 			timeElapsed = 0.0f;
 			amountOfTime -= 1;
-			for (int i = 0; i < bushes.Length; i++)
-				if(bushes[i] != null)
-					bushes [i].DoTick (); 
-			for (int i = 0; i < lizards.Length; i++)
-				if(lizards[i] != null)
-					lizards [i].DoTick (); 
+			for (int i = 0; i < plants.Length; i++)
+				if(plants[i] != null)
+					plants [i].DoTick (); 
+			for (int i = 0; i < animals.Length; i++)
+				if(animals[i] != null)
+					animals [i].DoTick (); 
 			
 		}
 		if (amountOfTime <= 0) {
