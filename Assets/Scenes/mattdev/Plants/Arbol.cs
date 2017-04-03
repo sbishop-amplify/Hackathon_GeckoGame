@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Tree : Plant {
+public class Arbol : Plant {
 	private static List<KeyValuePair<KeyValuePair<Food, int>, int>> FOOD_LIST = new List<KeyValuePair<KeyValuePair<Food, int>, int>> {
 		// Generate 10 leaves every tick
 		new KeyValuePair<KeyValuePair<Food, int>, int> (new KeyValuePair<Food, int>(new Leaf (), 10), 1),
