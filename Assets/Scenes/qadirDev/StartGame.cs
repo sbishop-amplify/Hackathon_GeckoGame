@@ -6,11 +6,8 @@ public class StartGame : MonoBehaviour {
 
 	public void startGame(){
 		UnityEngine.SceneManagement.SceneManager.LoadScene("QadirDev");		
-		GameManager gm = new GameManager ();
-<<<<<<< HEAD
+		//GameManager gm = new GameManager ();
 		//gm.UpdateGameState ();
-=======
->>>>>>> 4e1853230e90699cad2e3a11232754240222eae1
 	}
 
 	// Use this for initialization
