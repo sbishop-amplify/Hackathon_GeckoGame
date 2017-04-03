@@ -11,6 +11,9 @@ public abstract class Animal {
 		Name = Species;
 		// Default body temp is center comfort range
 		BodyTemp = (MaxTemp - MinTemp) / 2;
+		// Default health and fullness is full
+		health = MaxHealth;
+		fullness = MaxFullness;
 	}
 
 	////////////////////////
@@ -29,7 +32,7 @@ public abstract class Animal {
 	/// HEALTH STUFF ///
 	////////////////////
 
-	private int health = MaxHealth;
+	private int health;
 	public int Health {
 		get { return health; }
 		set {
@@ -70,7 +73,7 @@ public abstract class Animal {
 		}
 
 		// How far off are we?
-		float howBad = 0.0;
+		float howBad = 0.0f;
 		if (BodyTemp < MinTemp) {
 			howBad = MinTemp - currentTemp;
 		} else if(BodyTemp > MaxTemp){
@@ -81,9 +84,9 @@ public abstract class Animal {
 			float range = MaxTemp - MinTemp;
 			if (range < 1.0) {
 				// Most damage you can take is ALL OF IT
-				range = 1.0;
+				range = 1.0f;
 			}
-			int damage = MaxHealth * howBad / range;
+			int damage = (int)(MaxHealth * howBad / range);
 			Health -= damage > 0 ? damage : 1;
 		}
 	}
@@ -92,14 +95,10 @@ public abstract class Animal {
 	/// FOOD STUFF ///
 	//////////////////
 
-	// A Set of what foods we will eat
-	public abstract HashSet<Food> Diet { get; }
-	// Return true if we'll eat it
-	public bool WillEat(Food food) {
-		return Diet.Contains(food);
-	}
+	// A list of what foods we will eat
+	public abstract Food[] Diet { get; }
 	// Our current food store
-	private int fullness = MaxFullness;
+	private int fullness;
 	public int Fullness {
 		get { return fullness; }
 		set {
@@ -138,19 +137,19 @@ public abstract class Animal {
 
 		if (Fullness < HungerThreshold) {
 			// We're HUNGRY. Look for food we'll eat
-			foreach (Food f in food.Keys) {
-				if (WillEat (f)) {
+			foreach (Food f in Diet) {
+				if(food.ContainsKey(f)) {
 					// How much we want to eat (currently to full)
 					int hunger = MaxFullness - Fullness;
 					// How many units available
-					int avail = food [f];
+					int avail = food[f];
 					// How many units we want to eat
 					int desired = (hunger + f.Satiation - 1) / f.Satiation;
 					// How many we're actually going to eat
 					int ate = desired < avail ? desired : avail;
 
 					// EAT IT!
-					food [f] = avail - ate;
+					food[f] = avail - ate;
 					Fullness += ate * f.Satiation;
 
 					// Report what we ate here, possibly remove
@@ -183,7 +182,7 @@ public abstract class Animal {
 	//////////////////////
 
 	public void DoTick(object environment) {
-		float temp = 5.0; //gettemp
+		float temp = 5.0f; //gettemp
 		CheckTemp(temp);
 		// Might make more sense to check for death after every step
 		Dictionary<Food, int> foodPool = null;
