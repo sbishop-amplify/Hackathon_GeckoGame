@@ -51,7 +51,7 @@ public abstract class Animal : MonoBehaviour {
 				value = MaxHealth;
 			}
 
-			Debug.Log(string.Format("{0} HP: {1} -> {2} (out of {3})", Name, health, value, MaxHealth));
+			//Debug.Log(string.Format("{0} HP: {1} -> {2} (out of {3})", Name, health, value, MaxHealth));
 			health = value;
 		}
 	}
@@ -72,7 +72,7 @@ public abstract class Animal : MonoBehaviour {
 	// Converge body temperature on surroundings,
 	// and apply damage if it's too hot or cold
 	public void CheckTemp(float currentTemp) {
-		Debug.Log(string.Format("Checking temp of {0} against environment temp ({1})", Name, currentTemp));
+		//Debug.Log(string.Format("Checking temp of {0} against environment temp ({1})", Name, currentTemp));
 		// Alter our body temperature if we don't match
 		if (BodyTemp != currentTemp) {
 			float prev = BodyTemp;
@@ -83,7 +83,7 @@ public abstract class Animal : MonoBehaviour {
 				float change = BodyTemp - TempDelta;
 				BodyTemp = change > currentTemp ? change : currentTemp;
 			}
-			Debug.Log(string.Format("{0} BodyTemp: {1} -> {2}", Name, prev, BodyTemp));
+			//Debug.Log(string.Format("{0} BodyTemp: {1} -> {2}", Name, prev, BodyTemp));
 		}
 
 		// How far off are we?
@@ -94,7 +94,7 @@ public abstract class Animal : MonoBehaviour {
 			howBad = currentTemp - MaxTemp;
 		}
 		if (howBad > 0.0) {
-			Debug.Log(string.Format("{0} BodyTemp is {1} off from range of {2}-{3}", Name, howBad, MinTemp, MaxTemp));
+			//Debug.Log(string.Format("{0} BodyTemp is {1} off from range of {2}-{3}", Name, howBad, MinTemp, MaxTemp));
 			// Gonna take some ouchies
 			float range = MaxTemp - MinTemp;
 			if (range < 1.0) {
@@ -102,7 +102,7 @@ public abstract class Animal : MonoBehaviour {
 				range = 1.0f;
 			}
 			int damage = (int)(MaxHealth * howBad / range);
-			Debug.Log(string.Format("{0} took temp damage: {1} (({2}*{3})/{4})", Name, damage, MaxHealth, howBad, range));
+			//Debug.Log(string.Format("{0} took temp damage: {1} (({2}*{3})/{4})", Name, damage, MaxHealth, howBad, range));
 			Health -= damage > 0 ? damage : 1;
 		}
 	}
@@ -123,7 +123,7 @@ public abstract class Animal : MonoBehaviour {
 			} else if (value > MaxFullness) {
 				value = MaxFullness;
 			}
-			Debug.Log(string.Format("{0} Fullness: {1} -> {2} (out of {3})", Name, fullness, value, MaxFullness));
+			//Debug.Log(string.Format("{0} Fullness: {1} -> {2} (out of {3})", Name, fullness, value, MaxFullness));
 			fullness = value;
 		}
 	}
@@ -170,7 +170,7 @@ public abstract class Animal : MonoBehaviour {
 		}
 		// Check if we're starving to death.
 		if (burnOff < 1 && Starving) {
-			Debug.Log(string.Format("{0} is starving!", Name));
+			//Debug.Log(string.Format("{0} is starving!", Name));
 			// Take a percentage of max health as damage
 			int damage = (MaxHealth * STARVE_DAMAGE) / 100;
 			Health -= damage > 0 ? damage : 1;
@@ -193,6 +193,10 @@ public abstract class Animal : MonoBehaviour {
 	//////////////////////
 
 	public void DoTick() {
+		int hp = Health;
+		int fn = Fullness;
+		float bt = BodyTemp;
+
 		// Check the temperature where we are
 		var xy = gameObject.transform.position;
 		float temp = MyEnvironment.GetTemp (xy.x, xy.y);
@@ -215,18 +219,11 @@ public abstract class Animal : MonoBehaviour {
 			return;
 		}
 
-		// We survived!
-		if (TooCold) {
-			Debug.Log(string.Format("{0} is too cold!", Name));
-			// Report
-		} else if (TooHot) {
-			Debug.Log(string.Format("{0} is too hot!", Name));
-			// Report
-		}
-		if (Hungry) {
-			Debug.Log(string.Format("{0} is {1}!", Name, Starving ? "starving" : "hungry"));
-			// Report
-		}
+		Debug.Log (string.Format ("({}) HP: {}->{} | BodyTemp: {}->{}{} | Fullness: {}->{}{}",
+			Name,
+			hp, Health,
+			bt, BodyTemp, TooCold ? " (cold!)" : (TooHot ? " (hot!)" : ""),
+			fn, Fullness, Starving ? " (starving!)" : (Hungry ? " (hungry!)" : "")));
 	}
 
 	private void Die() {
