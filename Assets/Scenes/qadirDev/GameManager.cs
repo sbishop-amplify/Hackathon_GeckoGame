@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour {
 	private const int INITIAL_AMOUNT_OF_ANIMALS = 1;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
-
 	public void UpdateGameState(GameEvent gameEvent){
 		switch (gameEvent) {
 		case GameEvent.gameOver:
