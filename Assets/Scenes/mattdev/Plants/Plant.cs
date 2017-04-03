@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class Plant {
+public abstract class Plant : MonoBehaviour {
 	public abstract string Species { get; }
 
 	// Amount of ticks into production cycle we are

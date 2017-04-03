@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CloudClass : MonoBehaviour {
-	public float tempChange;
-	public string type;
 
 	public CloudClass (string type, float temp) {
-		this.type = type;
-		this.tempChange = temp;
+		this.Type = type;
+		this.TempChange = temp;
 	}
 
-	public float getTempChange(){
-		return this.tempChange;
-	}
+	public string Type { get; private set; }
+	public float TempChange { get; private set; }
 
 	// Use this for initialization
 	void Start () {

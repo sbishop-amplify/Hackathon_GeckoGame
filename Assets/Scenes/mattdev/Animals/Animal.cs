@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Animal {
+public abstract class Animal : MonoBehaviour {
 	// A constant for percent of damage taken each turn while starving
 	private const int STARVE_DAMAGE = 5;
+
+	private Grid MyGrid = GameObject.Find ("GridObject").GetComponent<Grid> ();
 
 	public Animal() {
 		// Default name chosen Pokeyman style
@@ -181,12 +183,13 @@ public abstract class Animal {
 	/// ACTIVITY STUFF ///
 	//////////////////////
 
-	public void DoTick(object environment) {
-		float temp = 5.0f; //gettemp
+	public void DoTick() {
+		var xy = gameObject.transform.position;
+		float temp = MyGrid.GetTemp (xy.x, xy.y);
 		CheckTemp(temp);
 		// Might make more sense to check for death after every step
-		Dictionary<Food, int> foodPool = null;
-		CheckHunger(foodPool);
+		// Dictionary<Food, int> foodPool = null;
+		// CheckHunger(foodPool);
 
 		if (IsAlive) {
 			if (TooCold) {
@@ -200,11 +203,11 @@ public abstract class Animal {
 				// Report
 			}
 		} else {
-			Die(environment);
+			Die();
 		}
 	}
 
-	private void Die(object environment) {
+	private void Die() {
 		// Pass in location/environment
 		// Add contents of body to environment
 		foreach(KeyValuePair<Food, int> food in MadeOf) {
