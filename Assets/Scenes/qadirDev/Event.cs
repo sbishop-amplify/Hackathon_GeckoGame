@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Event : MonoBehaviour {
+public class Events : MonoBehaviour {
+
+	public enum Event {
+		animalDied, 
+		animalIsHot,
+		levelChanged,
+		gameOver
+	};
 
 	// Use this for initialization
 	void Start () {
