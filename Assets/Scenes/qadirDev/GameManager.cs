@@ -21,7 +21,11 @@ public class GameManager : MonoBehaviour {
 	private const int INITIAL_AMOUNT_OF_ANIMALS = 1;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
+<<<<<<< HEAD
+	public void updateGameState(GameEvent gameEvent){
+=======
 	public void UpdateGameState(GameEvent gameEvent){
+>>>>>>> 1db37bb2516042e6cab77928c72be7ef3a6b10ad
 		switch (gameEvent) {
 		case GameEvent.gameOver:
 			UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");		
