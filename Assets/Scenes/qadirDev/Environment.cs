@@ -7,15 +7,7 @@ public class Environment : MonoBehaviour {
 	//TODO: Replace object with animal class later
 	private Dictionary<Food, int> foodSupply = new Dictionary<Food, int>();
 
-	private float currentTemp = 0.0f;
-	public float CurrentTemp{
-		get {
-			return currentTemp;
-		}
-		set {
-			currentTemp = value;
-		}
-	}
+	public float CurrentTemp { get; set; }
 
 	public int GetFoodAmount(Food food){
 		return foodSupply[food];

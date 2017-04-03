@@ -6,6 +6,7 @@ public abstract class Animal : MonoBehaviour {
 	// A constant for percent of damage taken each turn while starving
 	private const int STARVE_DAMAGE = 5;
 
+	private Environment MyEnvironment = GameObject.Find ("Environment").GetComponent<Environment> ();
 	private Grid MyGrid = GameObject.Find ("GridObject").GetComponent<Grid> ();
 
 	public Animal() {
@@ -123,7 +124,7 @@ public abstract class Animal : MonoBehaviour {
 	public abstract int HealRate { get; }
 
 	// Matabolize food into health, then, if hungry, eat or take damage.
-	public void CheckHunger(Dictionary<Food, int> food) {
+	public void CheckHunger() {
 		// Restore HealRate% of health each turn (if we have enough food)
 		int burnOff = Fullness > Metabolism ? Metabolism : Fullness;
 		// Heal if we burn off any food
@@ -140,23 +141,13 @@ public abstract class Animal : MonoBehaviour {
 		if (Fullness < HungerThreshold) {
 			// We're HUNGRY. Look for food we'll eat
 			foreach (Food f in Diet) {
-				if(food.ContainsKey(f)) {
-					// How much we want to eat (currently to full)
-					int hunger = MaxFullness - Fullness;
-					// How many units available
-					int avail = food[f];
-					// How many units we want to eat
-					int desired = (hunger + f.Satiation - 1) / f.Satiation;
-					// How many we're actually going to eat
-					int ate = desired < avail ? desired : avail;
-
-					// EAT IT!
-					food[f] = avail - ate;
-					Fullness += ate * f.Satiation;
-
-					// Report what we ate here, possibly remove
-					// foods of 0 quantity from the pool
-				}
+				// How much we want to eat (currently to full)
+				int hunger = MaxFullness - Fullness;
+				// How many units we want to eat
+				int desired = (hunger + f.Satiation - 1) / f.Satiation;
+				// Eat as much as we want/can
+				int ate = MyEnvironment.RemoveFood(f, desired);
+				Fullness += ate * f.Satiation;
 				if (Fullness == MaxFullness) break;
 			}
 		}
@@ -184,12 +175,13 @@ public abstract class Animal : MonoBehaviour {
 	//////////////////////
 
 	public void DoTick() {
+		// Check the temperature where we are
 		var xy = gameObject.transform.position;
 		float temp = MyGrid.GetTemp (xy.x, xy.y);
 		CheckTemp(temp);
 		// Might make more sense to check for death after every step
-		// Dictionary<Food, int> foodPool = null;
-		// CheckHunger(foodPool);
+		// Check for and eat food if we're hungry
+		CheckHunger();
 
 		if (IsAlive) {
 			if (TooCold) {
@@ -211,7 +203,7 @@ public abstract class Animal : MonoBehaviour {
 		// Pass in location/environment
 		// Add contents of body to environment
 		foreach(KeyValuePair<Food, int> food in MadeOf) {
-			//environment.AddFood(food.Key, food.Value);
+			MyEnvironment.AddFood(food.Key, food.Value);
 		}
 		//Report death
 	}
