@@ -13,21 +13,21 @@ public enum GameEvent {
 public class GameManager : MonoBehaviour {
 
 	private int level = 1;
-	private int numLizards = 1;
+	private int numAnimals = 1;
 	private int numDead = 0;
 	private float updateOn = 1.0f;
 	private float timeElapsed = 0.0f;
 	private const int INITIAL_GAME_DURATION = 30; //for thirty seconds
-	private const int INITIAL_AMOUNT_OF_LIZARDS = 1;
+	private const int INITIAL_AMOUNT_OF_ANIMALS = 1;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
-	private void updateGameState(GameEvent gameEvent){
+	public void UpdateGameState(GameEvent gameEvent){
 		switch (gameEvent) {
 		case GameEvent.gameOver:
 			UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");		
 			break;
 		case GameEvent.animalDied:
-			numLizards--;
+			numAnimals--;
 			numDead++;
 			break;
 		case GameEvent.levelChanged:
@@ -38,8 +38,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private bool isGameOver(){
-		return numLizards < INITIAL_AMOUNT_OF_LIZARDS / 2;
+	private bool IsGameOver {
+		get {
+			return numAnimals < INITIAL_AMOUNT_OF_ANIMALS / 2;
+		}
 	}
 
 	// Use this for initialization
@@ -55,13 +57,13 @@ public class GameManager : MonoBehaviour {
 			amountOfTime -= 1;
 		}
 		if (amountOfTime <= 0) {
-			if (isGameOver ())
-				updateGameState (GameEvent.gameOver);
+			if (IsGameOver)
+				UpdateGameState (GameEvent.gameOver);
 			else
-				updateGameState (GameEvent.levelChanged);
+				UpdateGameState (GameEvent.levelChanged);
 		}
-		if (isGameOver()) {
-			updateGameState (GameEvent.gameOver);
+		if (IsGameOver) {
+			UpdateGameState (GameEvent.gameOver);
 		}
 	}
 }
