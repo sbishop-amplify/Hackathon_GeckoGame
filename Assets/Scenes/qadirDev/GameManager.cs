@@ -71,9 +71,11 @@ public class GameManager : MonoBehaviour {
 			timeElapsed = 0.0f;
 			amountOfTime -= 1;
 			for (int i = 0; i < bushes.Length; i++)
-				bushes [i].DoTick (); 
+				if(bushes[i] != null)
+					bushes [i].DoTick (); 
 			for (int i = 0; i < lizards.Length; i++)
-				lizards [i].DoTick (); 
+				if(lizards[i] != null)
+					lizards [i].DoTick (); 
 			
 		}
 		if (amountOfTime <= 0) {
