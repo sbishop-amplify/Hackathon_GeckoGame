@@ -6,28 +6,39 @@ using UnityEngine;
 public class Environment : MonoBehaviour {
 	//TODO: Replace object with animal class later
 	private int currentTemp = 0;
-	private Dictionary<Object, int> foodSupply = new Dictionary<Object, int>();
+	private Dictionary<Food, int> foodSupply = new Dictionary<Food, int>();
 	private ArrayList animals = new ArrayList(); 
 
-	public int getCurrentTemp(){
-		return currentTemp;
-	}
+	public int CurrentTemp { get; set; }
 
-	public int getFoodAmount(Object food){
+	public int getFoodAmount(Food food){
 		return foodSupply[food];
 	}
 
-	public void addAnimals(Object animal){
+	public int addFood(Food food){
+		if (foodSupply [food] != null) {
+			int amt = foodSupply [food];
+			foodSupply [food] = amt + 1;
+		} else {
+			foodSupply [food] = 1;
+		}
+	}
+
+	public int takeFood(Food food){
+		if (foodSupply [food] != null) {
+			int amt = foodSupply [food];
+			foodSupply [food] = amt - 1;
+		} else {
+			foodSupply [food] = 0;
+		}
+	}
+
+	public void addAnimal(Animal animal){
 		animals.Add (animal);
 	}
 
-	public void removeAnimal(Object animal){
+	public void removeAnimal(Animal animal){
 		animals.Remove (animal);
-	}
-
-	public int changeCurrentTemp(int change){
-		currentTemp += change;
-		return currentTemp;
 	}
 
 	// Use this for initialization
