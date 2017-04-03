@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
 	private Lizard[] lizards; 
+	private Bush[] bushes; 
 
 	public void UpdateGameState(GameEvent gameEvent){
 		switch (gameEvent) {
@@ -54,6 +55,13 @@ public class GameManager : MonoBehaviour {
 		{
 			lizards [i] = lizObjects [i].GetComponent<Lizard> (); 
 		}
+
+		GameObject[] bushObjects = GameObject.FindGameObjectsWithTag ("Bush"); 
+		bushes = new Bush[bushObjects.Length]; 
+		for(int i = 0; i < bushes.Length; i++)
+		{
+			bushes [i] = bushObjects [i].GetComponent<Bush> (); 
+		}
 	}
 	
 	// Update is called once per frame
@@ -62,8 +70,11 @@ public class GameManager : MonoBehaviour {
 		if (timeElapsed >= updateOn) {
 			timeElapsed = 0.0f;
 			amountOfTime -= 1;
+			for (int i = 0; i < bushes.Length; i++)
+				bushes [i].DoTick (); 
 			for (int i = 0; i < lizards.Length; i++)
 				lizards [i].DoTick (); 
+			
 		}
 		if (amountOfTime <= 0) {
 			if (IsGameOver)

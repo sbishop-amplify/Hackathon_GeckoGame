@@ -6,8 +6,13 @@ using UnityEngine;
 public abstract class Plant : MonoBehaviour {
 	public abstract string Species { get; }
 
-	private Environment MyEnvironment = GameObject.Find ("Environment").GetComponent<Environment> ();
+	private Environment MyEnvironment;
 	//private Grid MyGrid = GameObject.Find ("GridObject").GetComponent<Grid> ();
+
+	void Awake()
+	{
+		MyEnvironment = GameObject.FindGameObjectWithTag ("Environment").GetComponent<Environment> ();
+	}
 
 	// Amount of ticks into production cycle we are
 	private int Cycle { get; set; }

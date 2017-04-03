@@ -102,7 +102,7 @@ public abstract class Animal : MonoBehaviour {
 				range = 1.0f;
 			}
 			int damage = (int)(MaxHealth * howBad / range);
-			Debug.Log(string.Format("Temp damage: {0} (({1}*{2})/{3})", MaxHealth, howBad, range));
+			Debug.Log(string.Format("Temp damage: {0} (({1}*{2})/{3})", damage, MaxHealth, howBad, range));
 			Health -= damage > 0 ? damage : 1;
 		}
 	}
