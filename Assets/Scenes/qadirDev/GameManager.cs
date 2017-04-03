@@ -10,7 +10,7 @@ public enum GameEvent {
 };
 
 
-public static class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 
 	private int level = 1;
 	private int numLizards = 1;

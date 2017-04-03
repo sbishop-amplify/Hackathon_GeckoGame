@@ -7,7 +7,6 @@ public abstract class Animal : MonoBehaviour {
 	private const int STARVE_DAMAGE = 5;
 
 	private Environment MyEnvironment = GameObject.Find ("Environment").GetComponent<Environment> ();
-	private Grid MyGrid = GameObject.Find ("GridObject").GetComponent<Grid> ();
 
 	public Animal() {
 		// Default name chosen Pokeyman style
@@ -177,7 +176,7 @@ public abstract class Animal : MonoBehaviour {
 	public void DoTick() {
 		// Check the temperature where we are
 		var xy = gameObject.transform.position;
-		float temp = MyGrid.GetTemp (xy.x, xy.y);
+		float temp = MyEnvironment.GetTemp (xy.x, xy.y);
 		CheckTemp(temp);
 		// Might make more sense to check for death after every step
 		// Check for and eat food if we're hungry
