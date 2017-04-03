@@ -8,6 +8,7 @@ public abstract class Animal : MonoBehaviour {
 
 	private Environment MyEnvironment = GameObject.Find ("Environment").GetComponent<Environment> ();
 	private Grid MyGrid = GameObject.Find ("GridObject").GetComponent<Grid> ();
+	private GameManager Manager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 
 	public Animal() {
 		// Default name chosen Pokeyman style
@@ -205,7 +206,8 @@ public abstract class Animal : MonoBehaviour {
 		foreach(KeyValuePair<Food, int> food in MadeOf) {
 			MyEnvironment.AddFood(food.Key, food.Value);
 		}
-		//Report death
+		Manager.updateGameState (GameEvent.animalDied);
+		Destroy(this.gameObject);
 	}
 
 	public override string ToString()
