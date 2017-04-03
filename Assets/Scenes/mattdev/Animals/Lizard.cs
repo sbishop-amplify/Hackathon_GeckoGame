@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Lizard : Animal {
-	private const Dictionary<Food, int> MADE_OF = new Dictionary<Food, int>{ { new Meat (), 2 } };
-	private const Dictionary<Food, int> DIET = new HashSet<Food> (new []{ new Bugs() });
+	private static Dictionary<Food, int> MADE_OF = new Dictionary<Food, int>{ { new Meat (), 2 } };
+	private static Food[] DIET = new Food[]{ new Bugs() };
 
 	public override string Species { get { return "Lizard"; } }
 
@@ -12,13 +12,13 @@ public class Lizard : Animal {
 
 	public override int MaxHealth { get { return 40; } }
 
-	public override float MinTemp { get { return 75.0; } }
+	public override float MinTemp { get { return 75.0f; } }
 
-	public override float MaxTemp { get { return 90.0; } }
+	public override float MaxTemp { get { return 90.0f; } }
 
-	public override float TempDelta { get { return 5.0; } }
+	public override float TempDelta { get { return 5.0f; } }
 
-	public override HashSet<Food> Diet { get { return DIET; } }
+	public override Food[] Diet { get { return DIET; } }
 
 	public override int MaxFullness { get { return 10; } }
 
