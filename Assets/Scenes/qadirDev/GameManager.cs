@@ -43,24 +43,24 @@ public class GameManager : MonoBehaviour {
 
 	private bool IsGameOver {
 		get {
-			return numAnimals < INITIAL_AMOUNT_OF_ANIMALS / 2;
+			return false; //numAnimals < 0;//INITIAL_AMOUNT_OF_ANIMALS / 2;
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		GameObject[] lizObjects = GameObject.FindGameObjectsWithTag ("Lizard"); 
+		GameObject[] lizObjects = GameObject.FindGameObjectsWithTag ("Animal"); 
 		animals = new Animal[lizObjects.Length]; 
 		for(int i = 0; i < animals.Length; i++)
 		{
 			animals [i] = lizObjects [i].GetComponent<Animal> (); 
 		}
 
-		GameObject[] bushObjects = GameObject.FindGameObjectsWithTag ("Bush"); 
+		GameObject[] bushObjects = GameObject.FindGameObjectsWithTag ("Plant"); 
 		plants = new Plant[bushObjects.Length]; 
 		for(int i = 0; i < plants.Length; i++)
 		{
-			plants [i] = bushObjects [i].GetComponent<Bush> (); 
+			plants [i] = bushObjects [i].GetComponent<Plant> (); 
 		}
 	}
 	

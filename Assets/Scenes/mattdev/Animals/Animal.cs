@@ -76,7 +76,6 @@ public abstract class Animal : MonoBehaviour {
 		// Alter our body temperature if we don't match
 		if (BodyTemp != currentTemp) {
 			float prev = BodyTemp;
-			Debug.Log(string.Format("Body temp adjusting from {0}...", BodyTemp));
 			if (currentTemp > BodyTemp) {
 				float change = BodyTemp + TempDelta;
 				BodyTemp = change < currentTemp ? change : currentTemp;
@@ -140,12 +139,10 @@ public abstract class Animal : MonoBehaviour {
 
 	// Matabolize food into health, then, if hungry, eat or take damage.
 	public void CheckHunger() {
-		Debug.Log(string.Format("Checking {0} hunger", Name));
 		// Restore HealRate% of health each turn (if we have enough food)
 		int burnOff = Fullness > Metabolism ? Metabolism : Fullness;
 		// Heal if we burn off any food
 		if (burnOff > 0) {
-			Debug.Log(string.Format("{0} food burnoff: {1}", Name, burnOff));
 			// Amount that you heal, arranged confusingly for int division.
 			// Logic is: MaxHealth * (HealRate/100) * (burnOff/Metabolism)
 			int heal = (MaxHealth * HealRate * burnOff) / (100 * Metabolism);
@@ -156,7 +153,6 @@ public abstract class Animal : MonoBehaviour {
 		}
 
 		if (Fullness < HungerThreshold) {
-			Debug.Log(string.Format("{0} is hungry!", Name));
 			// We're HUNGRY. Look for food we'll eat
 			foreach (Food f in Diet) {
 				// How much we want to eat (currently to full)
@@ -227,11 +223,8 @@ public abstract class Animal : MonoBehaviour {
 			Debug.Log(string.Format("{0} is too hot!", Name));
 			// Report
 		}
-		if (Starving) {
-			Debug.Log(string.Format("{0} is starving!", Name));
-			// Report
-		} else if (Hungry) {
-			Debug.Log(string.Format("{0} is hungry!", Name));
+		if (Hungry) {
+			Debug.Log(string.Format("{0} is {1}!", Name, Starving ? "starving" : "hungry"));
 			// Report
 		}
 	}
