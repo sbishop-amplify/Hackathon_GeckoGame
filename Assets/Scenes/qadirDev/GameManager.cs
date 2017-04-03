@@ -13,16 +13,16 @@ public class GameManager : MonoBehaviour {
 	private const int INITIAL_AMOUNT_OF_LIZARDS = 1;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
-	private void updateGameState(GameEvents.GameEvent gameEvent){
+	private void updateGameState(GameEvent gameEvent){
 		switch (gameEvent) {
-		case GameEvents.GameEvent.gameOver:
+		case GameEvent.gameOver:
 			UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");		
 			break;
-		case GameEvents.GameEvent.animalDied:
+		case GameEvent.animalDied:
 			numLizards--;
 			numDead++;
 			break;
-		case GameEvents.GameEvent.levelChanged:
+		case GameEvent.levelChanged:
 			level++;
 			break;
 		default:
@@ -48,12 +48,12 @@ public class GameManager : MonoBehaviour {
 		}
 		if (amountOfTime <= 0) {
 			if (isGameOver ())
-				updateGameState (GameEvents.GameEvent.gameOver);
+				updateGameState (GameEvent.gameOver);
 			else
-				updateGameState (GameEvents.GameEvent.levelChanged);
+				updateGameState (GameEvent.levelChanged);
 		}
 		if (isGameOver()) {
-			updateGameState (GameEvents.GameEvent.gameOver);
+			updateGameState (GameEvent.gameOver);
 		}
 	}
 }
