@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 
 	private bool IsGameOver {
 		get {
-			return false; //numAnimals < 0;//INITIAL_AMOUNT_OF_ANIMALS / 2;
+			return numAnimals <= INITIAL_AMOUNT_OF_ANIMALS / 2;
 		}
 	}
 

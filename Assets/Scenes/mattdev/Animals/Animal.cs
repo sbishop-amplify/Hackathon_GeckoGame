@@ -219,7 +219,7 @@ public abstract class Animal : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log (string.Format ("({}) HP: {}->{} | BodyTemp: {}->{}{} | Fullness: {}->{}{}",
+		Debug.Log (string.Format ("({0}) HP: {1}->{2} | BodyTemp: {3}->{4}{5} | Fullness: {6}->{7}{8}",
 			Name,
 			hp, Health,
 			bt, BodyTemp, TooCold ? " (cold!)" : (TooHot ? " (hot!)" : ""),
