@@ -10,7 +10,7 @@ public enum GameEvent {
 };
 
 
-public static class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 
 	private int level = 1;
 	private int numLizards = 1;
@@ -21,7 +21,7 @@ public static class GameManager : MonoBehaviour {
 	private const int INITIAL_AMOUNT_OF_LIZARDS = 1;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
-	private void updateGameState(GameEvent gameEvent){
+	public void updateGameState(GameEvent gameEvent){
 		switch (gameEvent) {
 		case GameEvent.gameOver:
 			UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");		
