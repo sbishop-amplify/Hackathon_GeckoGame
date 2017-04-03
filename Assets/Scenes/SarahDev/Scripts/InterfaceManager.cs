@@ -10,22 +10,14 @@ public class InterfaceManager : MonoBehaviour {
 
 	public GameObject cloud;
 	private GameObject current_cloud;	// The cloud that is currently being placed
-	//private int numClouds;  // This is not needed because number can be obtained by clouds list
 
-	List<GameObject> cloud_list; // This was never used, so I made use of it to store cloud_list in :p
+	List<GameObject> cloud_list; 
 
 	// Use this for initialization
 	void Start () {
-		/*
-		 * I'm not sure why but the currently commented code in Start() was
-		 * not working so I took it out and made line 11 public.
-		 * You can revert the changes if you don't want this current 
-		 * implementation.
-		 * 
-		 * You can delete this comment once you find out what works
-		 */
-		//cloud = (GameObject)Resources.Load ("Prefabs/Cloud");	// Had to be taken out because it was not working
-		cloud_list = new List<GameObject>();	// Was added because the above was not working
+		
+		cloud = (GameObject)Resources.Load ("Prefabs/Cloud");	
+		cloud_list = new List<GameObject>();	
 
 		this.transform.FindChild ("DeleteSelector").GetComponent<Button> ().onClick.AddListener (SetDelete);  
 		this.transform.FindChild ("CloudSelector").GetComponent<Button> ().onClick.AddListener (SetCloud); 
