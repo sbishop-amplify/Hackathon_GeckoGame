@@ -6,9 +6,14 @@ using UnityEngine;
 public abstract class Animal : MonoBehaviour {
 	// A constant for percent of damage taken each turn while starving
 	private const int STARVE_DAMAGE = 5;
+	private Environment MyEnvironment;
+	private GameManager Manager;
 
-	private Environment MyEnvironment = GameObject.Find ("Environment").GetComponent<Environment> ();
-	private GameManager Manager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
+	void Awake()
+	{
+		MyEnvironment = GameObject.FindGameObjectWithTag ("Environment").GetComponent<Environment> ();
+		Manager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
+	}
 
 	public Animal() {
 		// Default name chosen Pokeyman style

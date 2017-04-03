@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour {
 	private const int INITIAL_AMOUNT_OF_ANIMALS = 1;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
+	private Lizard[] lizards; 
+
 	public void UpdateGameState(GameEvent gameEvent){
 		switch (gameEvent) {
 		case GameEvent.gameOver:
@@ -46,7 +48,12 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		GameObject[] lizObjects = GameObject.FindGameObjectsWithTag ("Lizard"); 
+		lizards = new Lizard[lizObjects.Length]; 
+		for(int i = 0; i < lizards.Length; i++)
+		{
+			lizards [i] = lizObjects [i].GetComponent<Lizard> (); 
+		}
 	}
 	
 	// Update is called once per frame
@@ -55,6 +62,8 @@ public class GameManager : MonoBehaviour {
 		if (timeElapsed >= updateOn) {
 			timeElapsed = 0.0f;
 			amountOfTime -= 1;
+			for (int i = 0; i < lizards.Length; i++)
+				lizards [i].DoTick (); 
 		}
 		if (amountOfTime <= 0) {
 			if (IsGameOver)
