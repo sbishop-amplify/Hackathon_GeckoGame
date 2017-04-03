@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Food {
+public abstract class Food : MonoBehaviour {
 
 	public abstract string Name { get; }
 
