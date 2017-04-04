@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
 			break;
 		case GameEvent.levelChanged:
 			level++;
+			UnityEngine.SceneManagement.SceneManager.LoadScene("LevelTransition");		
 			break;
 		default:
 			return;
