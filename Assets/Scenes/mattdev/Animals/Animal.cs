@@ -248,7 +248,7 @@ public abstract class Animal : MonoBehaviour {
 				Sun = CurrentBubble.transform.Find ("sun").gameObject.GetComponent<SpriteRenderer> ();
 				Fly = CurrentBubble.transform.Find ("fly").gameObject.GetComponent<SpriteRenderer> ();
 			}
-
+		
 			// Sets the status
 			SnowFlake.enabled = TooCold;
 			Sun.enabled = TooHot;
@@ -270,6 +270,8 @@ public abstract class Animal : MonoBehaviour {
 			MyEnvironment.AddFood(food.Key, food.Value);
 		}
 		Manager.UpdateGameState (GameEvent.animalDied);
+		Destroy (CurrentBubble);
+		CurrentBubble = null;
 		Destroy(this.gameObject);
 	}
 
