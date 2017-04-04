@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class Bush : Plant {
 	private static List<KeyValuePair<KeyValuePair<Food, int>, int>> FOOD_LIST = new List<KeyValuePair<KeyValuePair<Food, int>, int>> {
 		// Generate 3 leaves every tick
-		new KeyValuePair<KeyValuePair<Food, int>, int> (new KeyValuePair<Food, int>(new Leaf(), 3), 1),
+		new KeyValuePair<KeyValuePair<Food, int>, int> (new KeyValuePair<Food, int>(Food.LEAF, 3), 1),
 		// Generate 4 berries every 5 ticks
-		new KeyValuePair<KeyValuePair<Food, int>, int> (new KeyValuePair<Food, int>(new Acorn(), 4), 5),
+		new KeyValuePair<KeyValuePair<Food, int>, int> (new KeyValuePair<Food, int>(Food.ACORN, 4), 5),
 		// Generate 5 bugs every 5 ticks. They like the berries.
-		new KeyValuePair<KeyValuePair<Food, int>, int> (new KeyValuePair<Food, int>(new Bugs(), 5), 5)
+		new KeyValuePair<KeyValuePair<Food, int>, int> (new KeyValuePair<Food, int>(Food.BUGS, 5), 5)
 	};
 
 	public override string Species { get { return "Bush"; } }

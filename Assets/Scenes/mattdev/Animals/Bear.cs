@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bear : Animal {
-	private static Dictionary<Food, int> MADE_OF = new Dictionary<Food, int>{ { new Meat (), 100 } };
-	private static Food[] DIET = new Food[]{ new Meat(), new Berry(), new Fruit() };
+	private static Dictionary<Food, int> MADE_OF = new Dictionary<Food, int>{ { Food.MEAT, 100 } };
+	private static Food[] DIET = new Food[]{ Food.MEAT, Food.BERRY, Food.FRUIT };
 
 	public override string Species { get { return "Bear"; } }
 
