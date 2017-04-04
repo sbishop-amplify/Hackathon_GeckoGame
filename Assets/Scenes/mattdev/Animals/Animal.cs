@@ -9,10 +9,20 @@ public abstract class Animal : MonoBehaviour {
 	private Environment MyEnvironment;
 	private GameManager Manager;
 
+	// Gameobjects for thought bubbles
+	private GameObject BubbleHot;
+	private GameObject BubbleCold;
+	private GameObject BubbleHungry;
+	private GameObject CurrentBubble;
+
 	void Awake()
 	{
 		MyEnvironment = GameObject.FindGameObjectWithTag ("Environment").GetComponent<Environment> ();
 		Manager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
+		BubbleHot = (GameObject)Resources.Load ("Prefabs/ThoughtHot");
+		BubbleCold = (GameObject)Resources.Load ("Prefabs/ThoughtCold");
+		BubbleHungry = (GameObject)Resources.Load ("Prefabs/ThoughtHungry");
+
 	}
 
 	public Animal() {
@@ -90,8 +100,20 @@ public abstract class Animal : MonoBehaviour {
 		float howBad = 0.0f;
 		if (BodyTemp < MinTemp) {
 			howBad = MinTemp - currentTemp;
+
+			// Creates the cold bubble
+			if (CurrentBubble != BubbleCold) {
+				CurrentBubble = Instantiate (BubbleCold);
+				CurrentBubble.transform.position = gameObject.transform.position;
+			} 
 		} else if(BodyTemp > MaxTemp){
 			howBad = currentTemp - MaxTemp;
+
+			// Creates the hot bubble
+			if (CurrentBubble != BubbleHot) {
+				CurrentBubble = Instantiate (BubbleHot);
+				CurrentBubble.transform.position = gameObject.transform.position;
+			} 
 		}
 		if (howBad > 0.0) {
 			//Debug.Log(string.Format("{0} BodyTemp is {1} off from range of {2}-{3}", Name, howBad, MinTemp, MaxTemp));
@@ -174,6 +196,12 @@ public abstract class Animal : MonoBehaviour {
 			// Take a percentage of max health as damage
 			int damage = (MaxHealth * STARVE_DAMAGE) / 100;
 			Health -= damage > 0 ? damage : 1;
+
+			// Creates the hungry bubble
+			if (CurrentBubble != BubbleHungry) {
+				CurrentBubble = Instantiate (BubbleHungry);
+				CurrentBubble.transform.position = gameObject.transform.position;
+			} 
 		}
 	}
 
