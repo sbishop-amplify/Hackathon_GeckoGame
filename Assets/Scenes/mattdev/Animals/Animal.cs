@@ -270,8 +270,10 @@ public abstract class Animal : MonoBehaviour {
 			MyEnvironment.AddFood(food.Key, food.Value);
 		}
 		Manager.UpdateGameState (GameEvent.animalDied);
-		Destroy (CurrentBubble);
-		CurrentBubble = null;
+		if (CurrentBubble != null) {
+			Destroy (CurrentBubble);
+			CurrentBubble = null;
+		}
 		Destroy(this.gameObject);
 	}
 
