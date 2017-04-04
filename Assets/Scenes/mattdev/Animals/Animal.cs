@@ -30,7 +30,6 @@ public abstract class Animal : MonoBehaviour {
 		Name = Species;
 		// Default body temp is center comfort range
 		BodyTemp = (MaxTemp + MinTemp) / 2;
-		Debug.Log (string.Format ("Default temp for {0}: {1}", Name, BodyTemp));
 		// Default health and fullness is full
 		health = MaxHealth;
 		fullness = MaxFullness;
