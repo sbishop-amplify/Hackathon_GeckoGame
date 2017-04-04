@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartGame : MonoBehaviour {
 
 	public void startGame(){
-		UnityEngine.SceneManagement.SceneManager.LoadScene("QadirDev");		
+		UnityEngine.SceneManagement.SceneManager.LoadScene("Master");		
 		//GameManager gm = new GameManager ();
 		//gm.UpdateGameState ();
 	}
