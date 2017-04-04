@@ -21,7 +21,7 @@ public abstract class Animal : MonoBehaviour {
 	{
 		MyEnvironment = GameObject.FindGameObjectWithTag ("Environment").GetComponent<Environment> ();
 		Manager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
-		Bubble = (GameObject)Resources.Load ("Prefabs/ThoughtBuble");
+		Bubble = (GameObject)Resources.Load ("Prefabs/ThoughtBubble");
 
 	}
 
@@ -243,6 +243,7 @@ public abstract class Animal : MonoBehaviour {
 			// Creates the cold bubble
 			if (CurrentBubble == null) {
 				CurrentBubble = Instantiate (Bubble);
+				CurrentBubble.transform.position = gameObject.transform.position;
 				SnowFlake = CurrentBubble.transform.Find ("snow_flake").gameObject.GetComponent<SpriteRenderer> ();
 				Sun = CurrentBubble.transform.Find ("sun").gameObject.GetComponent<SpriteRenderer> ();
 				Fly = CurrentBubble.transform.Find ("fly").gameObject.GetComponent<SpriteRenderer> ();
