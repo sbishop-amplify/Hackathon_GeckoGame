@@ -12,12 +12,16 @@ public abstract class Animal : MonoBehaviour {
 	// Gameobjects for thought bubbles
 	private GameObject CurrentBubble;
 	private GameObject Bubble;
+	private SpriteRenderer SnowFlake;
+	private SpriteRenderer Fly;
+	private SpriteRenderer Sun;
+
 
 	void Awake()
 	{
 		MyEnvironment = GameObject.FindGameObjectWithTag ("Environment").GetComponent<Environment> ();
 		Manager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
-		Bubble = (GameObject)Resources.Load ("Prefabs/ThoughtBuble");
+		Bubble = (GameObject)Resources.Load ("Prefabs/ThoughtBubble");
 
 	}
 
@@ -97,19 +101,9 @@ public abstract class Animal : MonoBehaviour {
 		if (BodyTemp < MinTemp) {
 			howBad = MinTemp - currentTemp;
 
-			// Creates the cold bubble
-			if (CurrentBubble != BubbleCold) {
-				CurrentBubble = Instantiate (BubbleCold);
-				CurrentBubble.transform.position = gameObject.transform.position;
-			} 
 		} else if(BodyTemp > MaxTemp){
 			howBad = currentTemp - MaxTemp;
-
-			// Creates the hot bubble
-			if (CurrentBubble != BubbleHot) {
-				CurrentBubble = Instantiate (BubbleHot);
-				CurrentBubble.transform.position = gameObject.transform.position;
-			} 
+		
 		}
 		if (howBad > 0.0) {
 			//Debug.Log(string.Format("{0} BodyTemp is {1} off from range of {2}-{3}", Name, howBad, MinTemp, MaxTemp));
@@ -193,11 +187,6 @@ public abstract class Animal : MonoBehaviour {
 			int damage = (MaxHealth * STARVE_DAMAGE) / 100;
 			Health -= damage > 0 ? damage : 1;
 
-			// Creates the hungry bubble
-			if (CurrentBubble != BubbleHungry) {
-				CurrentBubble = Instantiate (BubbleHungry);
-				CurrentBubble.transform.position = gameObject.transform.position;
-			} 
 		}
 	}
 
@@ -248,6 +237,29 @@ public abstract class Animal : MonoBehaviour {
 			hp, Health,
 			bt, BodyTemp, TooCold ? " (cold!)" : (TooHot ? " (hot!)" : ""),
 			fn, Fullness, Starving ? " (starving!)" : (Hungry ? " (hungry!)" : "")));
+
+		// Checks to see if something is wrong with the animal
+		if (TooCold || TooHot || Hungry) {
+			// Creates the cold bubble
+			if (CurrentBubble == null) {
+				CurrentBubble = Instantiate (Bubble);
+				CurrentBubble.transform.position = gameObject.transform.position;
+				SnowFlake = CurrentBubble.transform.Find ("snow_flake").gameObject.GetComponent<SpriteRenderer> ();
+				Sun = CurrentBubble.transform.Find ("sun").gameObject.GetComponent<SpriteRenderer> ();
+				Fly = CurrentBubble.transform.Find ("fly").gameObject.GetComponent<SpriteRenderer> ();
+			}
+
+			// Sets the status
+			SnowFlake.enabled = TooCold;
+			Sun.enabled = TooHot;
+			Fly.enabled = Hungry;
+		} else {
+			Destroy (CurrentBubble);
+			CurrentBubble = null;
+			SnowFlake = null;
+			Sun = null;
+			Fly = null;
+		}
 	}
 
 	private void Die() {
