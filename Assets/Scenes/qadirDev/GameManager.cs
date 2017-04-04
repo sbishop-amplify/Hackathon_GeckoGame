@@ -13,12 +13,12 @@ public enum GameEvent {
 public class GameManager : MonoBehaviour {
 
 	private int level = 1;
-	private int numAnimals = 1;
 	private int numDead = 0;
 	private float updateOn = 1.0f;
 	private float timeElapsed = 0.0f;
-	private const int INITIAL_GAME_DURATION = 30; //for thirty seconds
-	private const int INITIAL_AMOUNT_OF_ANIMALS = 1;
+	private const int INITIAL_GAME_DURATION = 30 * level; //for thirty seconds
+	private const int INITIAL_AMOUNT_OF_ANIMALS = 1 * level;
+	private int numAnimals = INITIAL_AMOUNT_OF_ANIMALS;
 	private float amountOfTime = INITIAL_GAME_DURATION;
 
 	private Animal[] animals; 
