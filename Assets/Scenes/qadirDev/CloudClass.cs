@@ -15,7 +15,7 @@ public class CloudClass : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		this.Type = "Type";
-		this.TempChange = -5.0f;
+		this.TempChange = -7.0f;
 	}
 	
 	// Update is called once per frame
