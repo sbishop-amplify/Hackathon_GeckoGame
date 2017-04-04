@@ -10,18 +10,14 @@ public abstract class Animal : MonoBehaviour {
 	private GameManager Manager;
 
 	// Gameobjects for thought bubbles
-	private GameObject BubbleHot;
-	private GameObject BubbleCold;
-	private GameObject BubbleHungry;
 	private GameObject CurrentBubble;
+	private GameObject Bubble;
 
 	void Awake()
 	{
 		MyEnvironment = GameObject.FindGameObjectWithTag ("Environment").GetComponent<Environment> ();
 		Manager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
-		BubbleHot = (GameObject)Resources.Load ("Prefabs/ThoughtHot");
-		BubbleCold = (GameObject)Resources.Load ("Prefabs/ThoughtCold");
-		BubbleHungry = (GameObject)Resources.Load ("Prefabs/ThoughtHungry");
+		Bubble = (GameObject)Resources.Load ("Prefabs/ThoughtBuble");
 
 	}
 
