@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NextLevel : MonoBehaviour {
+public class PlayAgain : MonoBehaviour {
 
-	public void StartNextLevel(){
-		UnityEngine.SceneManagement.SceneManager.LoadScene("Master");		
+	public void RestartGame (){
+		UnityEngine.SceneManagement.SceneManager.LoadScene("Master");
 	}
 
 	// Use this for initialization
@@ -16,8 +16,7 @@ public class NextLevel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown (0)) {
-			StartNextLevel ();
+			RestartGame ();
 		}
 	}
-
 }
